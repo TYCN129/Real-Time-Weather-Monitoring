@@ -1,9 +1,13 @@
 import { AsyncPaginate } from "react-select-async-paginate";
 import { useState } from "react";
 import { GEO_DB_URL, geoAPIOptions } from "../../API";
+import { useContext } from "react";
+import { AppContext } from "../../App";
 
 const Search = () => {
     const [search, setSearch] = useState(null);
+
+    const {onSearchChange} = useContext(AppContext);
 
     const loadOptions = (inputValue) => {
         return fetch(`${GEO_DB_URL}?minPopulation=1000000&namePrefix=${inputValue}`, geoAPIOptions)
@@ -22,6 +26,7 @@ const Search = () => {
 
     const handleChange = (searchData) => {
         setSearch(searchData);
+        onSearchChange(searchData);
     }
 
     return (
