@@ -3,6 +3,7 @@ import { useState } from "react";
 import { GEO_DB_URL, geoAPIOptions } from "../../API";
 import { useContext } from "react";
 import { AppContext } from "../../App";
+import './search.css';
 
 const Search = () => {
     const [search, setSearch] = useState(null);
@@ -10,7 +11,7 @@ const Search = () => {
     const {onSearchChange} = useContext(AppContext);
 
     const loadOptions = (inputValue) => {
-        return fetch(`${GEO_DB_URL}?minPopulation=1000000&namePrefix=${inputValue}`, geoAPIOptions)
+        return fetch(`${GEO_DB_URL}?namePrefix=${inputValue}`, geoAPIOptions)
         .then((response) => response.json())
         .then((response) => {
             return {
@@ -27,6 +28,7 @@ const Search = () => {
     const handleChange = (searchData) => {
         setSearch(searchData);
         onSearchChange(searchData);
+        setSearch(null);
     }
 
     return (
@@ -36,6 +38,7 @@ const Search = () => {
             value={search}
             onChange={handleChange}
             loadOptions={loadOptions}
+            className="searchBar"
         />
     );
 }
