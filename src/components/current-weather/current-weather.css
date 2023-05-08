@@ -67,3 +67,14 @@
 .parameter-label.top {
   border-bottom: 1px solid #fff;
 }
+
+.minus-icon {
+  display: hidden;
+  position: relative;
+  width: 20px;
+  z-index: 1;
+}
+
+.minus-icon:hover {
+  display: inline-block;
+}
